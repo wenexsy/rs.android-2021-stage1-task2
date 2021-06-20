@@ -170,3 +170,24 @@ if [ "$(uname)" = "Darwin" ] && [ "$HOME" = "$PWD" ]; then
 fi
 
 exec "$JAVACMD" "$@"
+
+def klockVersion = "..." // Find latest version in https://search.maven.org/artifact/com.soywiz.korlibs.klock/klock
+
+repositories {
+    mavenCentral()
+}
+
+// For multiplatform Kotlin
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "com.soywiz.korlibs.klock:klock:$klockVersion" // Common
+            }
+        }
+    }
+}
+
+// For JVM
+dependencies {
+    implementation "com.soywiz.korlibs.klock:klock-jvm:$klockVersion"
